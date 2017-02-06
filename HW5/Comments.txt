@@ -1,0 +1,51 @@
+
+The output of the code with the default configurations:
+
+** Fletcher-Reeves CG on xpowsing
+Success: 65 steps taken
+
+  Ending value: 4.293e-07 ; No. function evaluations: 205; No. gradient evaluations 89
+  Norm of ending gradient: 1.485e-05
+
+ 
+** PR+ CG on xpowsing
+Success: 59 steps taken
+
+  Ending value: 9.51e-07 ; No. function evaluations: 182; No. gradient evaluations 87
+  Norm of ending gradient: 2.267e-05
+
+ 
+** Steepest Descent on xpowsing
+CONVERGENCE FAILURE: 10000 steps were taken without
+gradient size decreasing below    1e-05.
+
+  Ending value: 9.047e-06 ; No. function evaluations: 29991; No. gradient evaluations 24966
+  Norm of ending gradient: 0.0001441
+
+  Comments:
+
+  1- It appears that Fletcher-Reeves and PR modification of the CG works much better than the steepest descent method. The steepest descent does not converge in the 10,000 iteration that it was given.
+———————————————————————————————————————————————————————————————————————————————————————
+  2- I tried changing the stepsize constants at first: using c2=0.3:
+  	Ending value: 9.047e-06 ; No. function evaluations: 29991; No. gradient evaluations 24966
+    Norm of ending gradient: 0.0001441
+
+  using c2=0.85 instead of c2=0.3 I will get 
+  	Ending value: 1.587e-05 ; No. function evaluations: 13434; No. gradient evaluations 12054
+  	Norm of ending gradient: 7.94e-05
+
+  	Which shows that the function's value becomes larger how ever the gradient value at the final step becomes smaller.
+———————————————————————————————————————————————————————————————————————————————————————
+  3- In function stepsize.m, if I do not return the update value of the alpha (for each step I use alpha_0=1 as starting alpha instead of using the one that stepszie.m has returned previously), I will get smaller value of gradient but not the function itself, and I will have higher number of evaluation both for the function and it’s gradient
+  
+  with alpha=1 as initial alpha for each step
+  Ending value: 1.451e-06 ; No. function evaluations: 30022; No. gradient evaluations 14994
+  Norm of ending gradient: 1.224e-05
+
+  using alpha of the previous step as starting point in stepsize.m
+  Ending value: 1.587e-05 ; No. function evaluations: 13434; No. gradient evaluations 12054
+  Norm of ending gradient: 7.94e-05
+
+
+———————————————————————————————————————————————————————————————————————————————————————
+Overall, I believe that little improvement can be obtained by changing the parameters of the stepsize.
